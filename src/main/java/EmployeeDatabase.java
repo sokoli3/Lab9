@@ -29,11 +29,10 @@ public class EmployeeDatabase {
 
     /**
      * Returns the manager for the given employee.
-     *
      * @param employee
      * @return
      */
-    Employee findManager(final Employee employee) {
+    Employee findManager (final Employee employee) {
         Employee manager = null;
         for (int i = 0; i < employees.size(); i++) {
             if (employees.get(i).getName() == employee.getManager()) {
@@ -45,8 +44,24 @@ public class EmployeeDatabase {
     }
 
     /**
+     * Returns the subordinate of the given employee.
+     * @param employee
+     * @return
+     */
+    Employee findSubordinate (final Employee employee) {
+        Employee manager = null;
+        for (int i = 0; i < employees.size(); i--) {
+            if (employees.get(i).getName() == employee.getManager()) {
+                manager = employees.get(i);
+                break;
+            }
+        }
+        return manager;
+    }
+    /**
      * Count the number of managers above this employee.
      * <p>
+     *
      * Consider both a recursive and an iterative solution to this problem.
      *
      * @param employee name of the employee
@@ -56,6 +71,13 @@ public class EmployeeDatabase {
         /*
          * Implement this function
          */
+        Employee manager = findManager(employee);
+        //Base case
+        if (manager == null) {
+            return 0;
+        }
+        //Recursive call
+        return countManagersAbove(manager) + 1;
     }
 
     /**
@@ -70,6 +92,13 @@ public class EmployeeDatabase {
         /*
          * Implement this function
          */
+        Employee subordinate = findSubordinate(employee);
+        //BC
+        if (subordinate == null) {
+            return 0;
+        }
+        //rc
+        return countEmployeesUnder(subordinate) + 1;
     }
 
     /**
