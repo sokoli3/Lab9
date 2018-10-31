@@ -93,7 +93,7 @@ public class EmployeeDatabase {
          * Implement this function
          */
         Employee subordinate = findSubordinate(employee);
-        //BC
+        //bc
         if (subordinate == null) {
             return 0;
         }
